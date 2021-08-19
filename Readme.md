@@ -1,14 +1,18 @@
 
 
 
-Starting Parse Server in Terminal
-1. Navigate to the directory containing the .pem key file (from AWS)
+Starting Parse Server
+1. Open Terminal/cmd and navigate to the directory containing the .pem key file (from AWS)
 2. Paste ssh -i "filename.pem" bitnami@ec2-18-119-207-157.us-east-2.compute.amazonaws.com and hit enter
 3. After the Bitnami graphic shows,
     - type cd stack/parse hit enter
     - type cat config.json hit enter
     You get the app details
-
+4. Add the Starter application class to the class package
+5. Switch to the Project structure and navigate to app/build.gradle. Add parse dependencies
+    //parse
+       implementation 'com.parse.bolts:bolts-tasks:1.4.0'
+       implementation 'com.parse:parse-android:1.13.0'
 
 NOTE:
 Public IP always change when the Instance is restarted
