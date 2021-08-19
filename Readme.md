@@ -26,3 +26,6 @@ For Windows, set the security policy from file properties. Remove all
 After the Bitnami graphic shows,
  - type cd stack/parse hit enter
  - type cat config.json hit enter
+
+Twitter Icon
+https://pixlok.com/images/twitter-splash-icon-png-image-free-download/
