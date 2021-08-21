@@ -24,6 +24,7 @@ public class UserSignUp {
                 } else {
                     Log.i("Sign up...", "Failed " + e.getMessage());
                     signUpStatus = "false";
+                    e.printStackTrace();
                 }
                 message = e.getMessage();
             }
