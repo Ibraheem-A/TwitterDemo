@@ -2,12 +2,14 @@ package com.example.twitterdemo
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
-class SignUpLoginActivity : AppCompatActivity() {
+class SignUpLoginActivity : AppCompatActivity(), View.OnKeyListener {
     var usernameEditText: EditText? = null
     var passwordEditText: EditText? = null
 
@@ -18,6 +20,14 @@ class SignUpLoginActivity : AppCompatActivity() {
         usernameEditText = findViewById(R.id.userNameTextView)
         passwordEditText = findViewById(R.id.passwordTextView)
     }
+
+    override fun onKey(view: View, keyCode: Int, event: KeyEvent): Boolean{
+        if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_DOWN){
+            onSignUpLoginClick(view)
+        }
+        return false
+    }
+
 
     fun onSignUpLoginClick(view: View){
         val usernameInput: String = usernameEditText?.text.toString().toLowerCase()
