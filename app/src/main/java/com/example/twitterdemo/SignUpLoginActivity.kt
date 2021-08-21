@@ -28,6 +28,10 @@ class SignUpLoginActivity : AppCompatActivity(), View.OnKeyListener {
         return false
     }
 
+    fun onBackgroundClickHideKeyboard(view: View){
+        val inputMethodManager: InputMethodManager = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
+    }
 
     fun onSignUpLoginClick(view: View){
         val usernameInput: String = usernameEditText?.text.toString().toLowerCase()
