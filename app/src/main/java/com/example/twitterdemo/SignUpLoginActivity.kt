@@ -1,13 +1,11 @@
 package com.example.twitterdemo
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.Toast
-import com.parse.ParseUser
+import androidx.appcompat.app.AppCompatActivity
 
 class SignUpLoginActivity : AppCompatActivity() {
     var usernameEditText: EditText? = null
@@ -27,19 +25,30 @@ class SignUpLoginActivity : AppCompatActivity() {
 
         if (!usernameInput.isEmpty() && !passwordInput.isEmpty()){
             if(ParseUtil.accountAlreadyExists(usernameInput, passwordInput)){
-                // Login
+                userLogin(usernameInput, passwordInput)
             } else {
                 val signUpResponse = UserSignUp.signUp(usernameInput, passwordInput)
                 if (signUpResponse[0].equals("true")){
-                    Toast.makeText(this, "Signed Up successfully", Toast.LENGTH_LONG).show();
-                    // Then Log User in
+                    Toast.makeText(this@SignUpLoginActivity, "Signed Up successfully", Toast.LENGTH_LONG).show();
+                    userLogin(usernameInput, passwordInput)
                 } else{
-                    Toast.makeText(this, signUpResponse[1], Toast.LENGTH_LONG).show();
+                    Toast.makeText(this@SignUpLoginActivity, signUpResponse[1], Toast.LENGTH_LONG).show();
                 }
             }
         }
 
     }
 
+    fun userLogin(username: String, passWord: String){
+        val loginResponse = UserLogin.login(username, passWord)
+
+        if(loginResponse[0].equals(true)){
+            Toast.makeText(this@SignUpLoginActivity, "Logged in successfully", Toast.LENGTH_LONG).show()
+            val startUsersListActivity = Intent(applicationContext, UserListActivity::class)
+            startActivity(startUsersListActivity)
+        } else {
+            Toast.makeText(this@SignUpLoginActivity, loginResponse[1], Toast.LENGTH_LONG).show();
+        }
+    }
 
 }
