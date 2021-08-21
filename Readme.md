@@ -28,4 +28,5 @@ After the Bitnami graphic shows,
  - type cat config.json hit enter
 
 Twitter Icon
-https://pixlok.com/images/twitter-splash-icon-png-image-free-download/
+Big icon - https://pixlok.com/images/twitter-splash-icon-png-image-free-download/
+Little icon - <div>Icons made by <a href="https://www.flaticon.com/authors/pixel-buddha" title="Pixel Buddha">Pixel Buddha</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
