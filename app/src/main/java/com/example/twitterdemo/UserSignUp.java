@@ -7,10 +7,10 @@ import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 
 public class UserSignUp {
-    String signUpStatus = "false";
-    String message = "Sign Up Failed";
+    private static String signUpStatus = "false";
+    private static String message = "Sign Up Failed";
 
-    public String[] signUp(String username, String password){
+    public static String[] signUp(String username, String password){
         ParseUser user = new ParseUser();
         user.setUsername(username);
         user.setPassword(password);
