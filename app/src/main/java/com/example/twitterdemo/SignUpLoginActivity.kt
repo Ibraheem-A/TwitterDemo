@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
+import com.parse.ParseUser
 
 class SignUpLoginActivity : AppCompatActivity() {
     var usernameEditText: EditText? = null
@@ -19,9 +20,18 @@ class SignUpLoginActivity : AppCompatActivity() {
     }
 
     fun onSignUpLoginClick(view: View){
-        var usernameInput: String = usernameEditText?.text.toString().toLowerCase()
-        var passwordInput: String = passwordEditText?.text.toString()
+        val usernameInput: String = usernameEditText?.text.toString().toLowerCase()
+        val passwordInput: String = passwordEditText?.text.toString()
 
+        if (!usernameInput.isEmpty() && !passwordInput.isEmpty()){
+            if(ParseUtil.accountAlreadyExists(usernameInput, passwordInput)){
+                // Login
+            } else {
+                // SignUp
+            }
+        }
 
     }
+
+
 }
