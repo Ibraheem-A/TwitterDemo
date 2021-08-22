@@ -3,4 +3,5 @@
     <string name="username">Username</string>
     <string name="password">password</string>
     <string name="sign_up_login">SIGN UP/LOGIN</string>
+    <string name="twitter_logo_description">Twitter Logo</string>
 </resources>
