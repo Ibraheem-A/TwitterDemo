@@ -12,10 +12,12 @@
         android:layout_width="235dp"
         android:layout_height="50dp"
         android:layout_marginTop="50dp"
-        android:text="@string/username"
+        android:hint="@string/username"
+        android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/littleIconView"/>
+        app:layout_constraintTop_toBottomOf="@+id/littleIconView"
+        android:importantForAutofill="no" />
 
     <EditText
         android:id="@+id/passwordTextView"
@@ -23,12 +25,13 @@
         android:layout_height="50dp"
         android:layout_marginTop="30dp"
         android:ems="10"
+        android:hint="@string/password"
         android:inputType="textPassword"
-        android:text="@string/password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userNameTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/userNameTextView"
+        android:importantForAutofill="no" />
 
     <Button
         android:id="@+id/buttonView"
@@ -46,6 +49,7 @@
         android:layout_width="77dp"
         android:layout_height="74dp"
         android:layout_marginTop="39dp"
+        android:contentDescription="@string/twitter_logo_description"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
