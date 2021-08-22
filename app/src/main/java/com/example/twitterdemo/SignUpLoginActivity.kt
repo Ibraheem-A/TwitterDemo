@@ -53,6 +53,7 @@ class SignUpLoginActivity : AppCompatActivity(), View.OnKeyListener {
 
     }
 
+    // this is written here because it is used more than once (so to avoid repetition)
     fun userLogin(username: String, passWord: String){
         val loginResponse = UserLogin.login(username, passWord)
 
