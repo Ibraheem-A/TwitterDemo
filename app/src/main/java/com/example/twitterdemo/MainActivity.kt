@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
+import com.parse.ParseAnalytics
 
 
 class MainActivity : AppCompatActivity() {
@@ -17,5 +18,7 @@ class MainActivity : AppCompatActivity() {
             startSignUpPage.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
             startActivity(startSignUpPage)
         }, 2000)
+
+        ParseAnalytics.trackAppOpenedInBackground(intent)
     }
 }
