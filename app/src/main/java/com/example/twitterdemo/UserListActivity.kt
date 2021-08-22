@@ -43,7 +43,13 @@ class UserListActivity : AppCompatActivity() {
                 }
             }
         })
-        var arrayAdapter = ArrayAdapter(applicationContext, android.R.layout.simple_selectable_list_item, usersArrayList)
+        var arrayAdapter = ArrayAdapter(applicationContext, android.R.layout.simple_list_item_checked, usersArrayList)
         userListView.adapter = arrayAdapter
+
+        userListView.setOnItemClickListener{ parent, view, position, id ->
+            // check to follow and unfollow
+        }
+
+
     }
 }
