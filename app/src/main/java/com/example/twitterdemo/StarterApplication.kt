@@ -1,9 +1,14 @@
-package com.example.twitterdemo;
+package com.example.twitterdemo
 
-import android.app.Application;
-
-import com.parse.Parse;
-import com.parse.ParseACL;
+import android.app.Application
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.util.Log
+import com.parse.Parse
+import com.parse.ParseACL
+import com.parse.ParseException
+import com.parse.ParseObject
+import com.parse.SaveCallback
 
 class StarterApplication : Application() {
 
@@ -21,21 +26,19 @@ class StarterApplication : Application() {
                 .build()
         )
 
-        /*
-        ParseObject object = new ParseObject("ExampleObject");
-        object.put("myNumber", "123");
-        object.put("myString", "Single");
-        object.saveInBackground(new SaveCallback() {
-            @Override
-            public void done(ParseException e) {
-                if (e == null){
-                    Log.i("Parse Result", "Successful!");
-                } else {
-                    Log.i("Parse Result", "Failed" + e.toString());
-                }
-            }
-        });
-        */
+
+//        val `object` = ParseObject("ExampleObject")
+//        `object`.put("myNumber", "123")
+//        `object`.put("myString", "Single")
+//        `object`.saveInBackground(SaveCallback() {
+//            fun done(e: ParseException?) {
+//                if (e == null) {
+//                    Log.i("Parse Result", "Successful!")
+//                } else {
+//                    Log.i("Parse Result", "Failed $e")
+//                }
+//            }
+//        })
 
 
         //ParseUser.enableAutomaticUser()
