@@ -41,7 +41,7 @@ public class ParseUtil {
         query.findInBackground(new FindCallback<ParseUser>() {
             @Override
             public void done(List<ParseUser> objects, ParseException e) {
-                if (!objects.isEmpty() && e == null) {
+                if (objects != null && e == null) {
                     Log.i("Credentials check...", "Account already Exists!!");
                     ParseUtil.accountAlreadyExists = true;
                 } else {
