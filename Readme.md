@@ -1,7 +1,7 @@
 
 
 
-Starting Parse Server
+# Starting Parse Server
 1. Open Terminal/cmd and navigate to the directory containing the .pem key file (from AWS)
 2. Paste ssh -i "filename.pem" bitnami@ec2-18-119-207-157.us-east-2.compute.amazonaws.com and hit enter
 3. After the Bitnami graphic shows,
@@ -13,6 +13,12 @@ Starting Parse Server
     //parse
        implementation 'com.parse.bolts:bolts-tasks:1.4.0'
        implementation 'com.parse:parse-android:1.13.0'
+
+## Using Parse web interface
+1. http://${18.119.207.157}/ OR http://127.0.0.1/parse replace with IP of server
+2. Default username - user
+3. Default password - $masterKey in Bitnami Server in CLI
+
 
 NOTE:
 Public IP always change when the Instance is restarted
