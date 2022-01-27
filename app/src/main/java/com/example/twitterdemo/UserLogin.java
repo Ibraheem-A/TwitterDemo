@@ -21,12 +21,14 @@ public class UserLogin {
                 if (e == null) {
                     Log.i("Logged in...", "Successfully");
                     loginStatus = "true";
+                    message = "Logged in... Successfully";
                 } else {
                     Log.i("Log in...", "Failed" + e.getMessage());
                     e.printStackTrace();
                     loginStatus = "false";
+                    message = e.getMessage();
                 }
-                message = e.getMessage();
+
             }
         });
         return new String[] {loginStatus, message};

@@ -58,7 +58,7 @@ class SignUpLoginActivity : AppCompatActivity(), View.OnKeyListener {
         val loginResponse = UserLogin.login(username, passWord)
 
         if(loginResponse[0].equals(true)){
-            Toast.makeText(this@SignUpLoginActivity, "Logged in successfully", Toast.LENGTH_LONG).show()
+            Toast.makeText(this@SignUpLoginActivity, loginResponse[1], Toast.LENGTH_LONG).show()
             val startUsersListActivity = Intent(applicationContext, UserListActivity::class.java)
             startActivity(startUsersListActivity)
         } else {
