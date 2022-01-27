@@ -21,12 +21,13 @@ public class UserSignUp {
                 if (e == null){
                     Log.i("Signed up...", "Successfully");
                     signUpStatus = "true";
+                    message = "Signed up... Successfully";
                 } else {
                     Log.i("Sign up...", "Failed " + e.getMessage());
                     signUpStatus = "false";
                     e.printStackTrace();
+                    message = e.getMessage();
                 }
-                message = e.getMessage();
             }
         });
         return new String[] {signUpStatus, message};
