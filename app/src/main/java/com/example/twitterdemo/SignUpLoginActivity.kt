@@ -8,6 +8,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import java.util.*
 
 class SignUpLoginActivity : AppCompatActivity(), View.OnKeyListener {
     var usernameEditText: EditText? = null
@@ -34,7 +35,7 @@ class SignUpLoginActivity : AppCompatActivity(), View.OnKeyListener {
     }
 
     fun onSignUpLoginClick(view: View){
-        val usernameInput: String = usernameEditText?.text.toString().toLowerCase()
+        val usernameInput: String = usernameEditText?.text.toString().toLowerCase(Locale.ROOT)
         val passwordInput: String = passwordEditText?.text.toString()
 
         if (!usernameInput.isEmpty() && !passwordInput.isEmpty()){
