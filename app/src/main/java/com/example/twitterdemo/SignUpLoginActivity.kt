@@ -38,7 +38,7 @@ class SignUpLoginActivity : AppCompatActivity(), View.OnKeyListener {
         val usernameInput: String = usernameEditText?.text.toString().toLowerCase(Locale.ROOT)
         val passwordInput: String = passwordEditText?.text.toString()
 
-        if (!usernameInput.isEmpty() && !passwordInput.isEmpty()){
+        if (usernameInput.isNotEmpty() && passwordInput.isNotEmpty()){
             if(ParseUtil.accountAlreadyExists(usernameInput, passwordInput)){
                 userLogin(usernameInput, passwordInput)
             } else {
