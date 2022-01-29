@@ -9,12 +9,30 @@ import com.parse.ParseUser;
 
 import java.util.List;
 
-public class ParseUtil {
+final public class ParseUtil {
 
-    static boolean usernameAlreadyExists = false;
-    static boolean accountAlreadyExists = false;
+    private static ParseUtil instance;
 
-    public static boolean usernameAlreadyExists (String username){
+    private boolean usernameAlreadyExists = false;
+    private boolean accountAlreadyExists = false;
+
+    public boolean isUsernameAlreadyExists() {
+        return usernameAlreadyExists;
+    }
+
+    public boolean isAccountAlreadyExists() {
+        return accountAlreadyExists;
+    }
+
+    public void setUsernameAlreadyExists(boolean usernameAlreadyExists) {
+        this.usernameAlreadyExists = usernameAlreadyExists;
+    }
+
+    public void setAccountAlreadyExists(boolean accountAlreadyExists) {
+        this.accountAlreadyExists = accountAlreadyExists;
+    }
+
+    public static boolean usernameAlreadyExists(String username){
         ParseQuery<ParseUser> query = ParseUser.getQuery();
         query.whereEqualTo("username", username.toLowerCase());
 
@@ -23,14 +41,15 @@ public class ParseUtil {
             public void done(List<ParseUser> objects, ParseException e) {
                 if (objects != null && e == null) {
                     Log.i("Username check...", "Already Exists!!");
-                    ParseUtil.usernameAlreadyExists = true;
+                    ParseUtil.get().setUsernameAlreadyExists(true);
                 } else {
                     Log.i("Username check...", "Account does not exist");
+                    ParseUtil.get().setUsernameAlreadyExists(false);
                 }
             }
         });
 
-        return usernameAlreadyExists;
+        return ParseUtil.get().isUsernameAlreadyExists();
     }
 
     public static boolean accountAlreadyExists (String username, String password){
@@ -43,13 +62,21 @@ public class ParseUtil {
             public void done(List<ParseUser> objects, ParseException e) {
                 if (objects != null && e == null) {
                     Log.i("Credentials check...", "Account already Exists!!");
-                    ParseUtil.accountAlreadyExists = true;
+                    ParseUtil.get().setAccountAlreadyExists(true);
                 } else {
                     Log.i("Credentials check...", "Account does not exist");
+                    ParseUtil.get().setAccountAlreadyExists(false);
                 }
             }
         });
 
-        return accountAlreadyExists;
+        return ParseUtil.get().isAccountAlreadyExists();
+    }
+
+    public static void create () {
+        instance = new ParseUtil();
+    }
+    public static ParseUtil get (){
+        return instance;
     }
 }
