@@ -49,7 +49,7 @@ final public class ParseUtil {
             }
         });
 
-        return ParseUtil.get().isUsernameAlreadyExists();
+        return instance.isUsernameAlreadyExists();
     }
 
     public static boolean accountAlreadyExists (String username, String password){
@@ -65,7 +65,7 @@ final public class ParseUtil {
                     ParseUtil.get().setAccountAlreadyExists(true);
                 } else {
                     Log.i("Credentials check...", "Account does not exist");
-                    ParseUtil.get().setAccountAlreadyExists(false);
+                    instance.setAccountAlreadyExists(false);
                 }
             }
         });
