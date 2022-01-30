@@ -65,12 +65,12 @@ final public class ParseUtil {
                     ParseUtil.get().setAccountAlreadyExists(true);
                 } else {
                     Log.i("Credentials check...", "Account does not exist");
-                    instance.setAccountAlreadyExists(false);
+                    ParseUtil.get().setAccountAlreadyExists(false);
                 }
             }
         });
 
-        return ParseUtil.get().isAccountAlreadyExists();
+        return instance.isAccountAlreadyExists();
     }
 
     public static void create () {
