@@ -32,7 +32,7 @@ final public class ParseUtil {
         this.accountAlreadyExists = accountAlreadyExists;
     }
 
-    public static boolean usernameAlreadyExists(String username){
+    public boolean usernameAlreadyExists(String username){
         ParseQuery<ParseUser> query = ParseUser.getQuery();
         query.whereEqualTo("username", username.toLowerCase());
 
@@ -52,7 +52,7 @@ final public class ParseUtil {
         return instance.isUsernameAlreadyExists();
     }
 
-    public static boolean accountAlreadyExists (String username, String password){
+    public boolean accountAlreadyExists (String username, String password){
         ParseQuery<ParseUser> query = ParseUser.getQuery();
         query.whereEqualTo("username", username.toLowerCase());
         query.whereEqualTo("password", password);
