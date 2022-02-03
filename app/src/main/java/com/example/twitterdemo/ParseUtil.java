@@ -52,25 +52,12 @@ final public class ParseUtil {
         return usernameAlreadyExists;
     }
 
-    public boolean accountAlreadyExists (String username, String password) {
+    public void accountAlreadyExists (String username, String password, FindCallback<ParseUser> callBack) {
         ParseQuery<ParseUser> query = ParseUser.getQuery();
         query.whereEqualTo("username", username.toLowerCase());
         query.whereEqualTo("password", password);
 
-        query.findInBackground(new FindCallback<ParseUser>() {
-            @Override
-            public void done(List<ParseUser> objects, ParseException e) {
-                if (objects != null && e == null) {
-                    Log.i("Credentials check...", "Account with username @" + username + " already Exists!!");
-                    ParseUtil.get().setAccountAlreadyExists(true);
-                } else {
-                    Log.i("Credentials check...", "Account with username @" + username + " does not Exist!!");
-                    ParseUtil.get().setAccountAlreadyExists(false);
-                }
-            }
-        });
-
-        return accountAlreadyExists;
+        query.findInBackground(callBack);
     }
 
     public static void create () {

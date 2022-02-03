@@ -2,12 +2,15 @@ package com.example.twitterdemo
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.parse.FindCallback
+import com.parse.ParseUser
 import java.util.*
 
 class SignUpLoginActivity : AppCompatActivity(), View.OnKeyListener {
@@ -35,24 +38,56 @@ class SignUpLoginActivity : AppCompatActivity(), View.OnKeyListener {
     }
 
     fun onSignUpLoginClick(view: View){
+        Log.i("Sign Up/Login", "Button Clicked!!!")
         val usernameInput: String = usernameEditText?.text.toString().toLowerCase(Locale.ROOT)
         val passwordInput: String = passwordEditText?.text.toString()
 
         if (usernameInput.isNotEmpty() && passwordInput.isNotEmpty()){
-            if(ParseUtil.accountAlreadyExists(usernameInput, passwordInput)){
-                userLogin(usernameInput, passwordInput)
-            } else {
-                val signUpResponse = UserSignUp.signUp(usernameInput, passwordInput)
-                if (signUpResponse[0].equals("true")){
-                    Toast.makeText(this@SignUpLoginActivity, "Signed Up successfully", Toast.LENGTH_LONG).show();
-                    userLogin(usernameInput, passwordInput)
-                } else{
-                    Toast.makeText(this@SignUpLoginActivity, signUpResponse[1], Toast.LENGTH_LONG).show();
+            Log.i("Sign Up/Login", "Initiating Parse check if account exists...")
+
+                ParseUtil.get().accountAlreadyExists(
+                    usernameInput, passwordInput
+                ) { objects, e ->
+                    if (objects != null && e == null) {
+                        Log.i(
+                            "Credentials check...",
+                            "Account with username @$usernameInput already Exists!!"
+                        )
+                        onAccountCheckResponse(usernameInput, passwordInput, true)
+                    } else {
+                        Log.i(
+                            "Credentials check...",
+                            "Account with username @$usernameInput does not Exist!!"
+                        )
+                        onAccountCheckResponse(usernameInput, passwordInput, false)
+                    }
                 }
             }
-        }
+
+
 
     }
+
+    fun onAccountCheckResponse(username:String, password:String, accountAlreadyExists:Boolean) {
+        if(accountAlreadyExists){
+            Log.i("Sign Up/Login", "Account exists already. Attempting Login...")
+            userLogin(username, password)
+        } else {
+            Log.i("Sign Up/Login", "Account does not exist. Attempting Sign Up...")
+            val signUpResponse = UserSignUp.signUp(username, password)
+            if (signUpResponse[0].equals("true")){
+                Toast.makeText(
+                    this@SignUpLoginActivity,
+                    "Signed Up successfully",
+                    Toast.LENGTH_LONG
+                ).show();
+                userLogin(username, password)
+            } else{
+                Toast.makeText(this@SignUpLoginActivity, signUpResponse[1], Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
 
     // this is written here because it is used more than once (so to avoid repetition)
     fun userLogin(username: String, passWord: String){
