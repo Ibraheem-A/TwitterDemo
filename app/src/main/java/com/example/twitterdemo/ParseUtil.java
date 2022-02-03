@@ -40,19 +40,19 @@ final public class ParseUtil {
             @Override
             public void done(List<ParseUser> objects, ParseException e) {
                 if (objects != null && e == null) {
-                    Log.i("Username check...", "Already Exists!!");
+                    Log.i("Username check...", "@" + username + " already Exists!!");
                     ParseUtil.get().setUsernameAlreadyExists(true);
                 } else {
-                    Log.i("Username check...", "Account does not exist");
+                    Log.i("Username check...", "@" + username + " does not exist");
                     ParseUtil.get().setUsernameAlreadyExists(false);
                 }
             }
         });
 
-        return instance.isUsernameAlreadyExists();
+        return usernameAlreadyExists;
     }
 
-    public boolean accountAlreadyExists (String username, String password){
+    public boolean accountAlreadyExists (String username, String password) {
         ParseQuery<ParseUser> query = ParseUser.getQuery();
         query.whereEqualTo("username", username.toLowerCase());
         query.whereEqualTo("password", password);
@@ -61,16 +61,16 @@ final public class ParseUtil {
             @Override
             public void done(List<ParseUser> objects, ParseException e) {
                 if (objects != null && e == null) {
-                    Log.i("Credentials check...", "Account already Exists!!");
+                    Log.i("Credentials check...", "Account with username @" + username + " already Exists!!");
                     ParseUtil.get().setAccountAlreadyExists(true);
                 } else {
-                    Log.i("Credentials check...", "Account does not exist");
+                    Log.i("Credentials check...", "Account with username @" + username + " does not Exist!!");
                     ParseUtil.get().setAccountAlreadyExists(false);
                 }
             }
         });
 
-        return instance.isAccountAlreadyExists();
+        return accountAlreadyExists;
     }
 
     public static void create () {
