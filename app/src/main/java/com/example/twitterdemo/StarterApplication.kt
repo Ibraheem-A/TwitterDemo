@@ -22,7 +22,7 @@ class StarterApplication : Application() {
         Parse.initialize(Parse.Configuration.Builder(applicationContext)
                 .applicationId("myappID")
                 .clientKey("hCxsL9CG4krg")
-                .server("http://3.70.112.251//parse/")
+                .server("http://3.70.204.147//parse/")
                 .build()
         )
 
