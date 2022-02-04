@@ -26,17 +26,17 @@ class SignUpLoginActivity : AppCompatActivity(), View.OnKeyListener {
 
     override fun onKey(view: View, keyCode: Int, event: KeyEvent): Boolean{
         if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_DOWN){
-            onSignUpLoginClick(view)
+            onSignUpLoginClick()
         }
         return false
     }
 
-    fun onBackgroundClickHideKeyboard(view: View){
+    fun onBackgroundClickHideKeyboard() {
         val inputMethodManager: InputMethodManager = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
     }
 
-    fun onSignUpLoginClick(view: View){
+    fun onSignUpLoginClick() {
         Log.i("Sign Up/Login", "Button Clicked!!!")
         val usernameInput: String = usernameEditText?.text.toString().toLowerCase(Locale.ROOT)
         val passwordInput: String = passwordEditText?.text.toString()
@@ -44,27 +44,16 @@ class SignUpLoginActivity : AppCompatActivity(), View.OnKeyListener {
         if (usernameInput.isNotEmpty() && passwordInput.isNotEmpty()){
             Log.i("Sign Up/Login", "Initiating Parse check if account exists...")
 
-                ParseUtil.get().accountAlreadyExists(
-                    usernameInput, passwordInput
-                ) { objects, e ->
+                ParseUtil.get().accountAlreadyExists(usernameInput, passwordInput) { objects, e ->
                     if (objects != null && e == null) {
-                        Log.i(
-                            "Credentials check...",
-                            "Account with username @$usernameInput already Exists!!"
-                        )
+                        Log.i("Credentials check...", "Account with username @$usernameInput already Exists!!")
                         onAccountCheckResponse(usernameInput, passwordInput, true)
                     } else {
-                        Log.i(
-                            "Credentials check...",
-                            "Account with username @$usernameInput does not Exist!!"
-                        )
+                        Log.i("Credentials check...", "Account with username @$usernameInput does not Exist!!")
                         onAccountCheckResponse(usernameInput, passwordInput, false)
                     }
                 }
             }
-
-
-
     }
 
     private fun onAccountCheckResponse(username: String, password: String, accountAlreadyExists: Boolean) {
@@ -91,7 +80,7 @@ class SignUpLoginActivity : AppCompatActivity(), View.OnKeyListener {
                 val startUsersListActivity = Intent(applicationContext, UserListActivity::class.java)
                 startActivity(startUsersListActivity)
             } else {
-                Log.i("Sign Up...", "Failed " + e.message)
+                Log.i("Log in...", "Failed " + e.message)
                 Toast.makeText(this@SignUpLoginActivity, e.message, Toast.LENGTH_LONG).show()
             }
         }
@@ -110,7 +99,7 @@ class SignUpLoginActivity : AppCompatActivity(), View.OnKeyListener {
                 Toast.makeText(this@SignUpLoginActivity, "Signed Up Successfully", Toast.LENGTH_LONG).show()
                 userLogin(username, password)
             } else {
-                Log.i("Log in...", "Failed " + e.message)
+                Log.i("Sign up...", "Failed " + e.message)
                 Toast.makeText(this@SignUpLoginActivity, e.message, Toast.LENGTH_LONG).show()
             }
         }
