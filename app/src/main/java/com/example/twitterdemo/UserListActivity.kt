@@ -25,7 +25,7 @@ class UserListActivity : AppCompatActivity() {
         val userListView: ListView = findViewById(R.id.userListView)
 
         val query = ParseUser.getQuery()
-        query.whereNotEqualTo("username", ParseUser.getQuery())
+        query.whereNotEqualTo("username", ParseUser.getCurrentUser().username)
         query.orderByAscending("username")
         query.findInBackground { objects, e ->
             if (objects!!.isNotEmpty() && e == null) {
