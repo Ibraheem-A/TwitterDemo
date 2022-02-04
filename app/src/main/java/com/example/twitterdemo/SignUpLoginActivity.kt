@@ -44,16 +44,20 @@ class SignUpLoginActivity : AppCompatActivity(), View.OnKeyListener {
         if (usernameInput.isNotEmpty() && passwordInput.isNotEmpty()){
             Log.i("Sign Up/Login", "Initiating Parse check if account exists...")
 
-                ParseUtil.get().accountAlreadyExists(usernameInput, passwordInput) { objects, e ->
-                    if (objects != null && e == null) {
-                        Log.i("Credentials check...", "Account with username @$usernameInput already Exists!!")
-                        onAccountCheckResponse(usernameInput, passwordInput, true)
-                    } else {
-                        Log.i("Credentials check...", "Account with username @$usernameInput does not Exist!!")
-                        onAccountCheckResponse(usernameInput, passwordInput, false)
-                    }
+            val query = ParseUser.getQuery()
+            query.whereEqualTo("username", usernameInput)
+            query.whereEqualTo("password", passwordInput)
+
+            query.findInBackground() { objects, e ->
+                if (objects != null && e == null) {
+                    Log.i("Credentials check...", "Account with username @$usernameInput already Exists!!")
+                    onAccountCheckResponse(usernameInput, passwordInput, true)
+                } else {
+                    Log.i("Credentials check...", "Account with username @$usernameInput does not Exist!!")
+                    onAccountCheckResponse(usernameInput, passwordInput, false)
                 }
             }
+        }
     }
 
     private fun onAccountCheckResponse(username: String, password: String, accountAlreadyExists: Boolean) {
