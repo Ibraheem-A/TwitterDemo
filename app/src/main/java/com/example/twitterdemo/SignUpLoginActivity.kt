@@ -48,7 +48,7 @@ class SignUpLoginActivity : AppCompatActivity(), View.OnKeyListener {
             query.whereEqualTo("username", usernameInput)
 
             query.findInBackground() { objects, e ->
-                if (objects != null && e == null) {
+                if (objects.isNotEmpty() && objects != null && e == null) {
                     Log.i("Credentials check...", "Account with username @$usernameInput already Exists!!")
                     onAccountCheckResponse(usernameInput, passwordInput, true)
                 } else {
