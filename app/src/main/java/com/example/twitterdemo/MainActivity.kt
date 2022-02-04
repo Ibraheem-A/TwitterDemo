@@ -12,8 +12,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        ParseUtil.create()
-
         Handler().postDelayed({
             val startSignUpPage = Intent(applicationContext, SignUpLoginActivity::class.java)
             startSignUpPage.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
