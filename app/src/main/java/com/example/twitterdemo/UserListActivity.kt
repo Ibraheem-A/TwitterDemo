@@ -27,22 +27,20 @@ class UserListActivity : AppCompatActivity() {
         val query = ParseUser.getQuery()
         query.whereNotEqualTo("username", ParseUser.getQuery())
         query.orderByAscending("username")
-        query.findInBackground(object : FindCallback<ParseUser?> {
-            override fun done(objects: MutableList<ParseUser?>?, e: ParseException?) {
-                if (!objects!!.isEmpty() && e == null) {
-                    Log.i("Querying users... ", "Found ${objects.size} user(s)")
-                    for (user in objects) {
-                        usersArrayList.add(user!!.username)
-                    }
-                } else {
-                    Toast.makeText(this@UserListActivity, e?.message, Toast.LENGTH_LONG).show()
-                    Log.i(
+        query.findInBackground { objects, e ->
+            if (objects!!.isNotEmpty() && e == null) {
+                Log.i("Querying users... ", "Found ${objects.size} user(s)")
+                for (user in objects) {
+                    usersArrayList.add(user!!.username)
+                }
+            } else {
+                Toast.makeText(this@UserListActivity, e?.message, Toast.LENGTH_LONG).show()
+                Log.i(
                         "Querying users... ",
                         """Failed!! Result: ${objects.size} users ${e?.message}"""
-                    )
-                }
+                )
             }
-        })
+        }
         var arrayAdapter = ArrayAdapter(applicationContext, android.R.layout.simple_list_item_checked, usersArrayList)
         userListView.adapter = arrayAdapter
 
