@@ -9,7 +9,6 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.parse.FindCallback
 import com.parse.ParseUser
 import java.util.*
 
@@ -68,7 +67,7 @@ class SignUpLoginActivity : AppCompatActivity(), View.OnKeyListener {
 
     }
 
-    fun onAccountCheckResponse(username:String, password:String, accountAlreadyExists:Boolean) {
+    fun onAccountCheckResponse(username: String, password: String, accountAlreadyExists: Boolean) {
         if(accountAlreadyExists){
             Log.i("Sign Up/Login", "Account exists already. Attempting Login...")
             userLogin(username, password)
@@ -90,15 +89,22 @@ class SignUpLoginActivity : AppCompatActivity(), View.OnKeyListener {
 
 
     // this is written here because it is used more than once (so to avoid repetition)
-    fun userLogin(username: String, passWord: String){
-        val loginResponse = UserLogin.login(username, passWord)
+    fun userLogin(username: String, password: String){
 
-        if(loginResponse[0].equals("true")){
-            Toast.makeText(this@SignUpLoginActivity, loginResponse[1], Toast.LENGTH_LONG).show()
-            val startUsersListActivity = Intent(applicationContext, UserListActivity::class.java)
-            startActivity(startUsersListActivity)
-        } else {
-            Toast.makeText(this@SignUpLoginActivity, loginResponse[1], Toast.LENGTH_LONG).show();
+        val user = ParseUser()
+        user.username = username
+        user.setPassword(password)
+
+        ParseUser.logInInBackground(username, password) { user, e ->
+            if (e == null) {
+                Log.i("Logged in...", "Successfully")
+                Toast.makeText(this@SignUpLoginActivity, "Logged in... Successfully", Toast.LENGTH_LONG).show()
+                val startUsersListActivity = Intent(applicationContext, UserListActivity::class.java)
+                startActivity(startUsersListActivity)
+            } else {
+                Log.i("Log in...", "Failed " + e.message)
+                Toast.makeText(this@SignUpLoginActivity, e.message, Toast.LENGTH_LONG).show()
+            }
         }
     }
 
