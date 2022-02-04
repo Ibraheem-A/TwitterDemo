@@ -67,45 +67,52 @@ class SignUpLoginActivity : AppCompatActivity(), View.OnKeyListener {
 
     }
 
-    fun onAccountCheckResponse(username: String, password: String, accountAlreadyExists: Boolean) {
-        if(accountAlreadyExists){
+    private fun onAccountCheckResponse(username: String, password: String, accountAlreadyExists: Boolean) {
+        if (accountAlreadyExists) {
             Log.i("Sign Up/Login", "Account exists already. Attempting Login...")
             userLogin(username, password)
         } else {
-            Log.i("Sign Up/Login", "Account does not exist. Attempting Sign Up...")
-            val signUpResponse = UserSignUp.signUp(username, password)
-            if (signUpResponse[0].equals("true")){
-                Toast.makeText(
-                    this@SignUpLoginActivity,
-                    "Signed Up successfully",
-                    Toast.LENGTH_LONG
-                ).show();
-                userLogin(username, password)
-            } else{
-                Toast.makeText(this@SignUpLoginActivity, signUpResponse[1], Toast.LENGTH_LONG).show();
-            }
+            userSignUp(username, password)
         }
     }
 
 
     // this is written here because it is used more than once (so to avoid repetition)
-    fun userLogin(username: String, password: String){
+    private fun userLogin(username: String, password: String){
 
         val user = ParseUser()
         user.username = username
         user.setPassword(password)
 
-        ParseUser.logInInBackground(username, password) { user, e ->
+        ParseUser.logInInBackground(username, password) { _, e ->
             if (e == null) {
                 Log.i("Logged in...", "Successfully")
                 Toast.makeText(this@SignUpLoginActivity, "Logged in... Successfully", Toast.LENGTH_LONG).show()
                 val startUsersListActivity = Intent(applicationContext, UserListActivity::class.java)
                 startActivity(startUsersListActivity)
             } else {
-                Log.i("Log in...", "Failed " + e.message)
+                Log.i("Sign Up...", "Failed " + e.message)
                 Toast.makeText(this@SignUpLoginActivity, e.message, Toast.LENGTH_LONG).show()
             }
         }
     }
 
+
+    private fun userSignUp(username: String, password: String){
+
+        val user = ParseUser()
+        user.username = username
+        user.setPassword(password)
+
+        user.signUpInBackground{ e ->
+            if (e == null) {
+                Log.i("Signed up...", "Successfully")
+                Toast.makeText(this@SignUpLoginActivity, "Signed Up Successfully", Toast.LENGTH_LONG).show()
+                userLogin(username, password)
+            } else {
+                Log.i("Log in...", "Failed " + e.message)
+                Toast.makeText(this@SignUpLoginActivity, e.message, Toast.LENGTH_LONG).show()
+            }
+        }
+    }
 }
