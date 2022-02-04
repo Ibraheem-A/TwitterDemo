@@ -26,17 +26,17 @@ class SignUpLoginActivity : AppCompatActivity(), View.OnKeyListener {
 
     override fun onKey(view: View, keyCode: Int, event: KeyEvent): Boolean{
         if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_DOWN){
-            onSignUpLoginClick()
+            onSignUpLoginClick(view)
         }
         return false
     }
 
-    fun onBackgroundClickHideKeyboard() {
+    fun onBackgroundClickHideKeyboard(view: View) {
         val inputMethodManager: InputMethodManager = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
     }
 
-    fun onSignUpLoginClick() {
+    fun onSignUpLoginClick(view: View) {
         Log.i("Sign Up/Login", "Button Clicked!!!")
         val usernameInput: String = usernameEditText?.text.toString().toLowerCase(Locale.ROOT)
         val passwordInput: String = passwordEditText?.text.toString()
