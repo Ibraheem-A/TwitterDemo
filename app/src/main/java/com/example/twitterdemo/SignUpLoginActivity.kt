@@ -46,7 +46,6 @@ class SignUpLoginActivity : AppCompatActivity(), View.OnKeyListener {
 
             val query = ParseUser.getQuery()
             query.whereEqualTo("username", usernameInput)
-            query.whereEqualTo("password", passwordInput)
 
             query.findInBackground() { objects, e ->
                 if (objects != null && e == null) {
