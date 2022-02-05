@@ -33,6 +33,7 @@ class UserListActivity : AppCompatActivity() {
                 for (user in objects) {
                     usersArrayList.add(user!!.username)
                 }
+                populateArrayAdapterAndListView(userListView)
             } else {
                 Toast.makeText(this@UserListActivity, e?.message, Toast.LENGTH_LONG).show()
                 Log.i(
@@ -41,15 +42,18 @@ class UserListActivity : AppCompatActivity() {
                 )
             }
         }
-        Log.i("UserListActivity","Populating Array Adapter...")
-        var arrayAdapter = ArrayAdapter(applicationContext, android.R.layout.simple_list_item_checked, usersArrayList)
-        Log.i("UserListActivity", "Update the View using the array adapter")
-        userListView.adapter = arrayAdapter
 
         userListView.setOnItemClickListener{ parent, view, position, id ->
             // check to follow and unfollow
         }
 
 
+    }
+
+    private fun populateArrayAdapterAndListView(userListView: ListView) {
+        Log.i("UserListActivity", "Populating Array Adapter...")
+        var arrayAdapter = ArrayAdapter(applicationContext, android.R.layout.simple_list_item_checked, usersArrayList)
+        Log.i("UserListActivity", "Update the View using the array adapter")
+        userListView.adapter = arrayAdapter
     }
 }
