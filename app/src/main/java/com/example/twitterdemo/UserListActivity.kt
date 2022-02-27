@@ -1,7 +1,11 @@
 package com.example.twitterdemo
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -15,6 +19,27 @@ import com.parse.ParseUser
 
 class UserListActivity : AppCompatActivity() {
     var usersArrayList = ArrayList<String>()
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        var menuInflater: MenuInflater = getMenuInflater()
+        menuInflater.inflate(R.menu.tweet_menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.tweet){
+
+        } else if (item.itemId == R.id.yourfeed){
+
+        } else if (item.itemId == R.id.logout){
+            ParseUser.logOut()
+            val startSignUpLoginActivity = Intent(applicationContext, SignUpLoginActivity::class.java)
+            startActivity(startSignUpLoginActivity)
+            Toast.makeText(applicationContext, "Logged out successfully", Toast.LENGTH_SHORT).show()
+        }
+
+        return super.onOptionsItemSelected(item)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
