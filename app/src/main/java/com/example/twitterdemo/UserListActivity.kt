@@ -46,6 +46,10 @@ class UserListActivity : AppCompatActivity() {
             builder.show()
 
         } else if (item.itemId == R.id.yourfeed){
+            var startUserFeedActivity = Intent(applicationContext, UserFeedActivity::class.java)
+            startActivity(startUserFeedActivity)
+            Log.i("Info", "Displaying feed for ${ParseUser.getCurrentUser().username}")
+
 
         } else if (item.itemId == R.id.logout){
             ParseUser.logOut()
