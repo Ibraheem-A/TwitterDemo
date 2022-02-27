@@ -49,7 +49,7 @@ class UserListActivity : AppCompatActivity() {
 
         } else if (item.itemId == R.id.logout){
             ParseUser.logOut()
-            Log.i("Info", "User Logging out")
+            Log.i("Info", "${ParseUser.getCurrentUser().username} Logging out")
             val startSignUpLoginActivity = Intent(applicationContext, SignUpLoginActivity::class.java)
             startActivity(startSignUpLoginActivity)
             Toast.makeText(applicationContext, "Logged out successfully", Toast.LENGTH_SHORT).show()
