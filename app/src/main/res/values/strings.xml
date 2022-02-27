@@ -4,4 +4,7 @@
     <string name="password">password</string>
     <string name="sign_up_login">SIGN UP/LOGIN</string>
     <string name="twitter_logo_description">Twitter Logo</string>
+    <string name="tweet">Tweet</string>
+    <string name="yourfeed">Your Feed</string>
+    <string name="logout">Logout</string>
 </resources>
