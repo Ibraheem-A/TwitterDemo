@@ -1,20 +1,18 @@
 package com.example.twitterdemo
 
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
-import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.ListView
-import android.widget.Toast
+import android.widget.*
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import com.parse.FindCallback
-import com.parse.ParseException
+import com.parse.ParseObject
 import com.parse.ParseUser
+import com.parse.SaveCallback
 
 
 class UserListActivity : AppCompatActivity() {
@@ -28,6 +26,24 @@ class UserListActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.tweet){
+            var builder = AlertDialog.Builder(this)
+            builder.setTitle("Send a Tweet")
+            var tweetEditText = EditText(this)
+            builder.setView(tweetEditText)
+            builder.setPositiveButton("Send", DialogInterface.OnClickListener { dialog, which -> Log.i("Info", tweetEditText.text.toString())
+                var tweetObject = ParseObject("Tweet")
+                tweetObject.put("tweet", tweetEditText.text.toString())
+                tweetObject.put("username", ParseUser.getCurrentUser().username)
+                tweetObject.saveInBackground(SaveCallback { e ->
+                    if(e == null){
+                        Toast.makeText(applicationContext, "Tweet sent!", Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(applicationContext, "Tweet failed :(", Toast.LENGTH_SHORT).show()
+                    }
+                })
+            })
+            builder.setNegativeButton("Cancel", DialogInterface.OnClickListener { dialog, which -> Log.i("Info", "User aborts tweet!"); dialog.cancel()})
+            builder.show()
 
         } else if (item.itemId == R.id.yourfeed){
 
