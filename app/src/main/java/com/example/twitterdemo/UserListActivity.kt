@@ -91,6 +91,13 @@ class UserListActivity : AppCompatActivity() {
 
         userListView.setOnItemClickListener{ parent, view, position, id ->
             // check to follow and unfollow
+            var checkedTextView = view as CheckedTextView
+            if (checkedTextView.isChecked) {
+                Log.i("Info", usersArrayList[position] + " Checked!")
+            } else {
+                Log.i("Info", usersArrayList[position] + "UnChecked!")
+            }
+
         }
 
 
