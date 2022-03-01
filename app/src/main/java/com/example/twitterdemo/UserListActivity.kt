@@ -93,9 +93,11 @@ class UserListActivity : AppCompatActivity() {
             // check to follow and unfollow
             var checkedTextView = view as CheckedTextView
             if (checkedTextView.isChecked) {
-                Log.i("Info", usersArrayList[position] + " Checked!")
+                checkedTextView.isChecked = false
+                Log.i("Info", usersArrayList[position] + " Unchecked!")
             } else {
-                Log.i("Info", usersArrayList[position] + "UnChecked!")
+                checkedTextView.isChecked = true
+                Log.i("Info", usersArrayList[position] + " Checked!")
             }
 
         }
