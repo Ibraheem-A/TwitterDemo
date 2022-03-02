@@ -95,10 +95,16 @@ class UserListActivity : AppCompatActivity() {
             if (checkedTextView.isChecked) {
                 checkedTextView.isChecked = false
                 Log.i("Info", usersArrayList[position] + " Unchecked!")
+                ParseUser.getCurrentUser().add("isFollowing", usersArrayList[position])
             } else {
                 checkedTextView.isChecked = true
                 Log.i("Info", usersArrayList[position] + " Checked!")
+                ParseUser.getCurrentUser().getList<String>("isFollowing").remove(usersArrayList[position])
+                var tempUsersList = ParseUser.getCurrentUser().getList<String>("isFollowing")
+                ParseUser.getCurrentUser().remove("isFollowing")
+                ParseUser.getCurrentUser().put("isFollowing", tempUsersList)
             }
+            ParseUser.getCurrentUser().saveInBackground()
 
         }
 
