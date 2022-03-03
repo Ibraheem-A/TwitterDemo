@@ -65,7 +65,7 @@ class UserListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_list)
 
-        title = "User feed"
+        title = "User List"
 
         val userListView: ListView = findViewById(R.id.userListView)
 
