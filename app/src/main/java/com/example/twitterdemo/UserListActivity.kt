@@ -50,7 +50,6 @@ class UserListActivity : AppCompatActivity() {
             startActivity(startUserFeedActivity)
             Log.i("Info", "Displaying feed for ${ParseUser.getCurrentUser().username}")
 
-
         } else if (item.itemId == R.id.logout){
             ParseUser.logOut()
             Log.i("Info", "${ParseUser.getCurrentUser().username} Logging out")
@@ -105,7 +104,6 @@ class UserListActivity : AppCompatActivity() {
                 ParseUser.getCurrentUser().put("isFollowing", tempUsersList)
             }
             ParseUser.getCurrentUser().saveInBackground()
-
         }
 
 
