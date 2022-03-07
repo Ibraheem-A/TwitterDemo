@@ -17,7 +17,7 @@ class UserFeedActivity : AppCompatActivity() {
 
         title = "User feed"
 
-        val userFeedActivity: ListView = findViewById(R.id.userFeedView)
+        val userFeedListView: ListView = findViewById(R.id.userFeedView)
 
         val tweetData = ArrayList<Map<String, String>>()
 
