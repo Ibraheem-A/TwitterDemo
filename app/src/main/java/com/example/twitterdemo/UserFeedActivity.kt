@@ -3,12 +3,10 @@ package com.example.twitterdemo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.ListView
 import android.widget.SimpleAdapter
 import com.parse.ParseObject
 import com.parse.ParseQuery
-import com.parse.ParseUser
 
 class UserFeedActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,7 +41,7 @@ class UserFeedActivity : AppCompatActivity() {
         }
     }
 
-    public fun createSimpleAdapter(data:ArrayList<Map<String, String>>): SimpleAdapter{
+    private fun createSimpleAdapter(data:ArrayList<Map<String, String>>): SimpleAdapter{
         return SimpleAdapter(this, data, android.R.layout.simple_list_item_2, arrayOf("content", "username"), intArrayOf(android.R.id.text1, android.R.id.text2))
     }
 }
