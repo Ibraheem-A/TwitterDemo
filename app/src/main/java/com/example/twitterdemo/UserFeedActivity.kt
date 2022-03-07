@@ -34,7 +34,7 @@ class UserFeedActivity : AppCompatActivity() {
                     tweetData.add(tweetInfo)
                 }
 
-                createSimpleAdapter(tweetData)
+                userFeedListView.adapter = createSimpleAdapter(tweetData)
 
             } else {
                 Log.i("Tweet", "Not found")
