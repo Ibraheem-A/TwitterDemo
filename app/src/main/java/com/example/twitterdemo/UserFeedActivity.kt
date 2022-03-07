@@ -5,8 +5,10 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.ListView
 import android.widget.SimpleAdapter
+import android.widget.TextView
 import com.parse.ParseObject
 import com.parse.ParseQuery
+import com.parse.ParseUser
 
 class UserFeedActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,6 +22,8 @@ class UserFeedActivity : AppCompatActivity() {
         val tweetData = ArrayList<Map<String, String>>()
 
         val query:ParseQuery<ParseObject> = ParseQuery.getQuery("Tweet")
+        query.whereContainedIn("username", ParseUser.getCurrentUser().getList("isFollowing"))
+        query.orderByDescending("createdAt")
         query.findInBackground{ objects, e ->
             if (objects!!.isNotEmpty() && e== null){
                 Log.i("Users followed", "Tweet found... Loading to view")
